@@ -47,6 +47,7 @@ class SPAGenerator:
 		# Common to all frameworks
 		add_commands_to_root_package_json(self.app, self.spa_name)
 		self.create_www_directory()
+		self.create_context_python_file()
 		self.add_csrf_to_html()
 
 		if self.add_tailwindcss:
@@ -194,6 +195,12 @@ class SPAGenerator:
 		if not www_dir_path.exists():
 			www_dir_path.mkdir()
 
+	def create_context_python_file(self):
+		context_file_path: Path = self.app_path / f"{self.app}/www/{self.spa_name}.py"
+
+		if not context_file_path.exists():
+			create_file(context_file_path, HTML_CONTEXT_PY_BOILERPLATE.replace("{{name}}", self.spa_name))
+
 	def add_csrf_to_html(self):
 		index_html_file_path = self.spa_path / "index.html"
 		with index_html_file_path.open("r") as f:
@@ -201,7 +208,11 @@ class SPAGenerator:
 
 		# For attaching CSRF Token
 		updated_html = current_html.replace(
-			"</div>", "</div>\n\t\t<script>window.csrf_token = '{{ frappe.session.csrf_token }}';</script>"
+			"</div>", """</div>
+		<script>
+			window.csrf_token = '{{ frappe.session.csrf_token }}';
+			// TODO: load boot data here (context file is created in `www` directory)
+		</script>"""
 		)
 
 		with index_html_file_path.open("w") as f:
