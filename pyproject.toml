@@ -1,4 +1,5 @@
 [project]
+
 name = "doppio"
 authors = [
     { name = "Hussain Nagaria", email = "hussainbhaitech@gmail.com" }
