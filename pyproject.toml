@@ -2,11 +2,19 @@
 name = "doppio"
 version = "0.0.1"
 description = "A dream."
+authors = [
+    { name = "Hussain Nagaria", email = "hussainbhaitech@gmail.com" }
+]
+readme = "README.md"
 requires-python = ">=3.10"
+dependencies = []
 
 [build-system]
 requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
+# REQUIRED for Bench compatibility
 [tool.bench.frappe-dependencies]
 frappe = ">=15.0.0,<16.0.0"
+
+[tool.bench.dev-dependencies]
