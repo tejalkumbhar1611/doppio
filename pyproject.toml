@@ -1,8 +1,6 @@
 [project]
 name = "doppio"
-authors = [
-    { name = "Hussain Nagaria", email = "hussainbhaitech@gmail.com" }
-]
+version = "0.0.1"
 description = "A dream."
 requires-python = ">=3.10"
 readme = "README.md"
